@@ -1,2 +1,4 @@
-# GoHome
-A personal webpage project using go, templ and htmx
+# Laelapa/GoHome
+A personal webpage+blog+portfolio using go, templ and htmx. 
+
+
