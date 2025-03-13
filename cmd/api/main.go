@@ -18,7 +18,7 @@ import (
 // if run encounters an error.
 func main() {
 	if err := run(); err != nil {
-		log.Fatal("FATAL: %v\n", err)
+		log.Fatalf("FATAL: %v\n", err)
 	}
 }
 
@@ -43,7 +43,7 @@ func run() error {
 	if err != nil {
 		return fmt.Errorf("error creating logger: %w", err) // FIXME: add error handling
 	}
-	
+
 	app := app.New(ctx, logger)
 	if err = app.LaunchServer(); err != nil {
 		return fmt.Errorf("error launching server: %w", err) // FIXME: add error handling
