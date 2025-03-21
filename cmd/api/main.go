@@ -1,3 +1,5 @@
+// Package main implements the entry point for the GoHome server.
+// It handles the initialization of core components and the HTTP server.
 package main
 
 import (
@@ -25,7 +27,7 @@ func main() {
 // run initializes and orchestrates all components of the application:
 //   - Sets up signal handling for graceful shutdown
 //   - Loads environment variables
-//   - Initializes the logger
+//   - Initializes the zap logger
 //   - Launches the HTTP server
 //
 // Returns an error if any initialization step fails.

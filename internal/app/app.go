@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/Laelapa/GoHome/internal/routes"
 	"go.uber.org/zap"
 )
 
@@ -48,12 +49,8 @@ func New(
 // newMux creates and configures the HTTP request multiplexer with all routes
 // and middleware attached.
 func newMux() http.Handler {
-
-	var mux http.Handler = http.NewServeMux()
-	// TODO: setup routes
-	mux = attachBasicMiddleware(mux)
-
-	return mux
+	mux := routes.Setup()
+	return attachBasicMiddleware(mux)
 }
 
 // attachBasicMiddleware wraps the provided handler with common middleware
