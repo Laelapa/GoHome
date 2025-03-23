@@ -10,8 +10,8 @@ import (
 func Setup() *http.ServeMux {
 	mux := http.NewServeMux()
 
-	mux.HandleFunc("GET /", handlers.HandleHome)
-	mux.HandleFunc("GET /health", handlers.HandleHealth)
+	mux.HandleFunc("GET /", handlers.HandleGetHome)
+	mux.HandleFunc("GET /health", handlers.HandleGetHealth)
 
 	return mux
 }

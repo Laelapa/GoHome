@@ -2,7 +2,7 @@ package handlers
 
 import "net/http"
 
-func HandleHome(w http.ResponseWriter, r *http.Request) {
+func HandleGetHome(w http.ResponseWriter, r *http.Request) {
 
 	if r.URL.Path != "/" {
 		http.NotFound(w, r)
