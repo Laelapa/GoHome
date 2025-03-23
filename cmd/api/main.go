@@ -1,3 +1,5 @@
+// Package main implements the entry point for the GoHome server.
+// It handles the initialization of core components and the HTTP server.
 package main
 
 import (
@@ -6,6 +8,7 @@ import (
 	"log"
 	"os"
 	"os/signal"
+	"time"
 
 	"github.com/Laelapa/GoHome/internal/app"
 	"github.com/Laelapa/GoHome/internal/logging"
@@ -18,15 +21,15 @@ import (
 // if run encounters an error.
 func main() {
 	if err := run(); err != nil {
-		log.Fatal("FATAL: %v\n", err)
+		log.Fatalf("FATAL: %v\n", err)
 	}
 }
 
 // run initializes and orchestrates all components of the application:
 //   - Sets up signal handling for graceful shutdown
 //   - Loads environment variables
-//   - Initializes the logger
-//   - Launches the HTTP server
+//   - Initializes the zap logger
+//   - Launches the HTTP server and the static file server
 //
 // Returns an error if any initialization step fails.
 func run() error {
@@ -43,8 +46,21 @@ func run() error {
 	if err != nil {
 		return fmt.Errorf("error creating logger: %w", err) // FIXME: add error handling
 	}
-	
-	app := app.New(ctx, logger)
+
+	// Parse the server shutdown timeout from the environment
+	shutdownTimeout, err := time.ParseDuration(os.Getenv("SERVER_SHUTDOWN_TIMEOUT") + "s")
+	if err != nil {
+		shutdownTimeout = 5 * time.Second // fallback default
+		logger.Warnf("Failed to parse SERVER_SHUTDOWN_TIMEOUT, using default: %v\n", shutdownTimeout)
+	}
+
+	app := app.New(
+		ctx,
+		logger,
+		os.Getenv("SERVER_PORT"),
+		os.Getenv("STATIC_DIR"),
+		shutdownTimeout,
+	)
 	if err = app.LaunchServer(); err != nil {
 		return fmt.Errorf("error launching server: %w", err) // FIXME: add error handling
 	}

@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/Laelapa/GoHome/internal/routes"
 	"go.uber.org/zap"
 )
 
@@ -27,33 +28,34 @@ type App struct {
 // Parameters:
 //   - ctx: The context for the application lifecycle
 //   - logger: A configured zap logger for application logging
+//   - port: The port on which the server will listen for incoming requests
+//   - staticDir: The directory containing static files to serve
+//   - shutdownTimeout: The duration to wait during shutdown before forcefully terminating
 func New(
 	ctx context.Context,
 	logger *zap.SugaredLogger,
+	port string,
+	staticDir string,
+	shutdownTimeout time.Duration,
 ) *App {
-
 	return &App{
 		ctx:    ctx,
 		logger: logger,
 		server: &http.Server{
-			Addr:    ":8080", // TODO: grab from .env instead
-			Handler: newMux(),
+			Addr:    fmt.Sprintf(":%s", port),
+			Handler: newMux(staticDir),
 		},
 		serverOptions: &serverOptions{
-			shutdownTimeout: 5 * time.Second,
+			shutdownTimeout: shutdownTimeout,
 		},
 	}
 }
 
 // newMux creates and configures the HTTP request multiplexer with all routes
 // and middleware attached.
-func newMux() http.Handler {
-
-	var mux http.Handler = http.NewServeMux()
-	// TODO: setup routes
-	mux = attachBasicMiddleware(mux)
-
-	return mux
+func newMux(staticDir string) http.Handler {
+	mux := routes.Setup(staticDir)
+	return attachBasicMiddleware(mux)
 }
 
 // attachBasicMiddleware wraps the provided handler with common middleware
@@ -73,6 +75,7 @@ func attachBasicMiddleware(handler http.Handler) http.Handler {
 func (app *App) SetServerShutdownTimeout(t time.Duration) {
 
 	app.serverOptions.shutdownTimeout = t
+	app.logger.Infof("Server shutdown timeout set to %vns\n", t)
 }
 
 // LaunchServer starts the HTTP server and manages its lifecycle. It will run
@@ -101,6 +104,7 @@ func (app *App) LaunchServer() error {
 
 	case <-app.ctx.Done():
 
+		app.logger.Infof("Shutting down server\n")
 		app.ShutdownServer()
 		return nil
 	}
