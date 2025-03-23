@@ -28,9 +28,11 @@ type App struct {
 // Parameters:
 //   - ctx: The context for the application lifecycle
 //   - logger: A configured zap logger for application logging
+//   - staticDir: The directory containing static files to serve
 func New(
 	ctx context.Context,
 	logger *zap.SugaredLogger,
+	staticDir string,
 ) *App {
 
 	return &App{
@@ -38,7 +40,7 @@ func New(
 		logger: logger,
 		server: &http.Server{
 			Addr:    ":8080", // TODO: grab from .env instead
-			Handler: newMux(),
+			Handler: newMux(staticDir),
 		},
 		serverOptions: &serverOptions{
 			shutdownTimeout: 5 * time.Second,
@@ -48,8 +50,8 @@ func New(
 
 // newMux creates and configures the HTTP request multiplexer with all routes
 // and middleware attached.
-func newMux() http.Handler {
-	mux := routes.Setup()
+func newMux(staticDir string) http.Handler {
+	mux := routes.Setup(staticDir)
 	return attachBasicMiddleware(mux)
 }
 

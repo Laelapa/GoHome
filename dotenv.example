@@ -1,0 +1,4 @@
+ENVIRONMENT=dev|development|test|testing|prod|production # `ENVIRONMENT=dev` enables API endpoints to do "dev" things like resetting the database.
+SERVER_SHUTDOWN_TIMEOUT=5 #Time in seconds the server has for graceful shutdown before being forced to close
+SERVER_PORT=8080 #Port the server will listen on
+STATIC_DIR=static #Directory where static files are stored. ATTENTION: Consider using an absolute path instead

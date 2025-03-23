@@ -28,7 +28,7 @@ func main() {
 //   - Sets up signal handling for graceful shutdown
 //   - Loads environment variables
 //   - Initializes the zap logger
-//   - Launches the HTTP server
+//   - Launches the HTTP server and the static file server
 //
 // Returns an error if any initialization step fails.
 func run() error {
@@ -46,7 +46,7 @@ func run() error {
 		return fmt.Errorf("error creating logger: %w", err) // FIXME: add error handling
 	}
 
-	app := app.New(ctx, logger)
+	app := app.New(ctx, logger, "static") // TODO: add static dir configuration through env var
 	if err = app.LaunchServer(); err != nil {
 		return fmt.Errorf("error launching server: %w", err) // FIXME: add error handling
 	}
