@@ -8,6 +8,7 @@ import (
 	"log"
 	"os"
 	"os/signal"
+	"time"
 
 	"github.com/Laelapa/GoHome/internal/app"
 	"github.com/Laelapa/GoHome/internal/logging"
@@ -46,7 +47,20 @@ func run() error {
 		return fmt.Errorf("error creating logger: %w", err) // FIXME: add error handling
 	}
 
-	app := app.New(ctx, logger, "static") // TODO: add static dir configuration through env var
+	// Parse the server shutdown timeout from the environment
+	shutdownTimeout, err := time.ParseDuration(os.Getenv("SERVER_SHUTDOWN_TIMEOUT") + "s")
+	if err != nil {
+		shutdownTimeout = 5 * time.Second // fallback default
+		logger.Warnf("Failed to parse SERVER_SHUTDOWN_TIMEOUT, using default: %v\n", shutdownTimeout)
+	}
+
+	app := app.New(
+		ctx,
+		logger,
+		os.Getenv("SERVER_PORT"),
+		os.Getenv("STATIC_DIR"),
+		shutdownTimeout,
+	)
 	if err = app.LaunchServer(); err != nil {
 		return fmt.Errorf("error launching server: %w", err) // FIXME: add error handling
 	}
