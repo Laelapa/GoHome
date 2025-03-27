@@ -26,7 +26,10 @@ go.work.sum
 
 # Local testing environment configurations
 docker-compose.yml
-Makefile
+#Makefile
+
+# Templ files
+
 
 # Backups and SQL dumps
 pgdump/*.sql
