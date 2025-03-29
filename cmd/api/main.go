@@ -47,6 +47,13 @@ func run() error {
 		return fmt.Errorf("error creating logger: %w", err) // FIXME: add error handling
 	}
 
+	defer func() {
+		if syncErr := logger.Sync(); syncErr != nil {
+			// Print the error without crashing the program
+			fmt.Fprintf(os.Stderr, "Failed to sync logger: %v\n", syncErr)
+		}
+	}()
+
 	// Parse the server shutdown timeout from the environment
 	shutdownTimeout, err := time.ParseDuration(os.Getenv("SERVER_SHUTDOWN_TIMEOUT") + "s")
 	if err != nil {
@@ -58,7 +65,7 @@ func run() error {
 		ctx,
 		logger,
 		os.Getenv("SERVER_PORT"),
-		os.Getenv("STATIC_DIR"),
+		os.Getenv("STATIC_DIR"), // FIXME: check if this is a valid path
 		shutdownTimeout,
 	)
 	if err = app.LaunchServer(); err != nil {
