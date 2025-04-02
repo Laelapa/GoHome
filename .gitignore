@@ -28,8 +28,14 @@ go.work.sum
 docker-compose.yml
 #Makefile
 
-# Templ files
+# Templ generated files
+internal/interface/templates/*.go
 
+# TailwindCSS generated files
+static/css/style.css
+
+# TailwindCSS binary
+tailwindcss
 
 # Backups and SQL dumps
 pgdump/*.sql

@@ -4,7 +4,7 @@ install-tailwind-linux:
 	chmod +x tailwindcss-linux-x64
 	mv tailwindcss-linux-x64 tailwindcss
 
-.PHONY: tailwind-build
+.PHONY: tailwind-generate
 tailwind-generate:
 	./tailwindcss -i ./src/css/custom.css -o ./static/css/style.css
 
