@@ -47,6 +47,9 @@ pgdump/*.sql
 # Obsidian personal notes
 docs/dev/
 
+# Static files
+static/
+
 # VSCode files
 .vscode/
 

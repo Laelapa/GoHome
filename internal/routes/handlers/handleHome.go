@@ -1,12 +1,35 @@
 package handlers
 
-import "net/http"
+import (
+	"net/http"
 
-func HandleGetHome(w http.ResponseWriter, r *http.Request) {
+	"github.com/Laelapa/GoHome/internal/interface/templates"
+)
+
+func (h *Handler) HandleGetHome(w http.ResponseWriter, r *http.Request) {
 
 	if r.URL.Path != "/" {
 		http.NotFound(w, r)
 		return
 	}
-	w.Write([]byte("Welcome to GoHome"))
+
+	w.Header().Set("Content-Type", "text/html")
+
+	if err := templates.Home().Render(r.Context(), w); err != nil {
+		h.Logger.Errorw("Failed to render home page",
+		"method", r.Method,
+		"path", r.URL.Path,
+		"remote_addr", r.RemoteAddr,
+		"error", err,
+	)
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		return
+
+	}
+
+	h.Logger.Infow("Rendered: Home page",
+	"method", r.Method,
+	"path", r.URL.Path,
+	"remote_addr", r.RemoteAddr,
+	)
 }

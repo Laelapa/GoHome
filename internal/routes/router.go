@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/Laelapa/GoHome/internal/routes/handlers"
+	"go.uber.org/zap"
 )
 
 // Setup initializes and returns a configured router with all application routes
@@ -11,7 +12,7 @@ import (
 //
 // Parameters:
 //   - fsDir: The directory containing static files to serve
-func Setup(staticDir string) *http.ServeMux {
+func Setup(staticDir string, logger *zap.SugaredLogger) *http.ServeMux {
 
 	mux := http.NewServeMux()
 	fileServer := http.StripPrefix("/static/", http.FileServer(http.Dir(staticDir)))

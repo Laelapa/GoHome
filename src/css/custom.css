@@ -1,1 +1,9 @@
 @import "tailwindcss";
+
+@theme {
+    --color-chalkgreen: #65AB72;
+    --color-chalkpapyrus: #FAE59F;
+    --color-sapphire-100: #387684;
+    --color-sapphire-200: #2D6F7F;
+    --color-sapphire-300: #216778;
+}
