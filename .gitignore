@@ -50,6 +50,9 @@ docs/dev/
 # Static files
 static/
 
+# Compiled binaries
+bin/
+
 # VSCode files
 .vscode/
 

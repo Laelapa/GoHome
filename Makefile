@@ -19,3 +19,15 @@ templ-generate:
 .PHONY: templ-watch
 templ-watch:
 	templ generate --watch
+
+.PHONY: build
+build: 
+	go build -o bin/goHome ./cmd/api/main.go
+
+.PHONY: run
+run: 
+	go run ./cmd/api/main.go
+
+.PHONY: serve
+serve:
+	templ-generate tailwind-generate 
