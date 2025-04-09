@@ -11,6 +11,9 @@
 # Test binary, built with `go test -c`
 *.test
 
+# Temporary files
+tmp/
+
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
 
@@ -26,7 +29,16 @@ go.work.sum
 
 # Local testing environment configurations
 docker-compose.yml
-Makefile
+#Makefile
+
+# Templ generated files
+internal/interface/templates/*.go
+
+# TailwindCSS generated files
+static/css/style.css
+
+# TailwindCSS binary
+tailwindcss
 
 # Backups and SQL dumps
 pgdump/*.sql
@@ -37,6 +49,13 @@ pgdump/*.sql
 
 # Obsidian personal notes
 docs/dev/
+
+# Static origin files
+static/
+static/assets/archive/
+
+# Compiled binaries
+bin/
 
 # VSCode files
 .vscode/
