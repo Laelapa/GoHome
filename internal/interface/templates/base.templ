@@ -9,5 +9,13 @@ templ head(title string) {
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Lexend+Exa:wght@100..900&display=swap" rel="stylesheet">
+
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+              document.querySelectorAll('.char').forEach(el => {
+                el.classList.remove('transition-initial-none');
+              });
+            });
+        </script>
     </head>
 }
