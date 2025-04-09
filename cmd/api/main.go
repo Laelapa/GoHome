@@ -48,7 +48,7 @@ func run() error {
 	}
 
 	defer func() {
-		if syncErr := logger.Sync(); syncErr != nil {
+		if syncErr := logger.Sync(); syncErr != nil { // FIXME: handle case of writing to unbuffered output that doesnt support sync
 			// Print the error without crashing the program
 			fmt.Fprintf(os.Stderr, "Failed to sync logger: %v\n", syncErr)
 		}
@@ -71,6 +71,8 @@ func run() error {
 	if err = app.LaunchServer(); err != nil {
 		return fmt.Errorf("error launching server: %w", err) // FIXME: add error handling
 	}
+
+	
 
 	return nil
 }

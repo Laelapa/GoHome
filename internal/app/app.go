@@ -43,7 +43,7 @@ func New(
 		logger: logger,
 		server: &http.Server{
 			Addr:    fmt.Sprintf(":%s", port),
-			Handler: newMux(staticDir),
+			Handler: newMux(staticDir, logger),
 		},
 		serverOptions: &serverOptions{
 			shutdownTimeout: shutdownTimeout,
@@ -53,8 +53,8 @@ func New(
 
 // newMux creates and configures the HTTP request multiplexer with all routes
 // and middleware attached.
-func newMux(staticDir string) http.Handler {
-	mux := routes.Setup(staticDir)
+func newMux(staticDir string, logger *zap.SugaredLogger) http.Handler {
+	mux := routes.Setup(staticDir, logger)
 	return attachBasicMiddleware(mux)
 }
 

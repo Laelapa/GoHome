@@ -11,6 +11,9 @@
 # Test binary, built with `go test -c`
 *.test
 
+# Temporary files
+tmp/
+
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
 
@@ -46,6 +49,13 @@ pgdump/*.sql
 
 # Obsidian personal notes
 docs/dev/
+
+# Static origin files
+static/
+static/assets/archive/
+
+# Compiled binaries
+bin/
 
 # VSCode files
 .vscode/
