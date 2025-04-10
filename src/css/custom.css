@@ -9,10 +9,25 @@
     --color-darksapphire: #082431;
 
     --font-lexend: 'Lexend Exa', sans-serif;
+    --font-arvo: 'Arvo', serif;
+    --font-montserrat: 'Montserrat', sans-serif;
+    --font-chonburi: 'Chonburi', serif;
 }
 
 .text-outline {
-    -webkit-text-stroke: 1px var(--color-stone-400);
+  text-shadow:
+    -1px -1px 0 var(--color-neutral-400),
+    1px -1px 0 var(--color-neutral-400),
+    -1px 1px 0 var(--color-neutral-400),
+    1px 1px 0 var(--color-neutral-400);
+}
+
+.text-outline-sm {
+  text-shadow:
+    -0.5px -0.5px 0 var(--color-stone-400),
+    0.5px -0.5px 0 var(--color-stone-400),
+    -0.5px 0.5px 0 var(--color-stone-400),
+    0.5px 0.5px 0 var(--color-stone-400);
 }
 
 .wavy-edge {

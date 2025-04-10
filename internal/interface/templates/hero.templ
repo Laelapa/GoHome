@@ -1,40 +1,37 @@
 package templates
 
-import (
-    "fmt"
-)
+import "fmt"
 
 templ hero() {
-<section class='relative h-screen 
+	<section
+		class='relative h-screen 
                   bg-[#65ab72] 
                   bg-[url("data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20width=%2724%27%20height=%2724%27%20viewBox=%270%200%2024%2024%27%3E%3Cg%20fill=%27%23fae59f%27%20fill-opacity=%270.19%27%3E%3Cpolygon%20fill-rule=%27evenodd%27%20points=%278%204%2012%206%208%208%206%2012%204%208%200%206%204%204%206%200%208%204%27/%3E%3C/g%3E%3C/svg%3E")] 
-                  bg-repeat bg-center'>
-      <!-- Left side -->
-      <div class="md:absolute md:bottom-24 md:left-48 z-10">
-        <span class="text-left">
-          <h1 class="text-4xl md:text-6xl font-bold font-serif text-chalkpapyrus mb-4 text-outline">
-            @slowBurnText("Developer, Programmer, Software Guy, Coder")
-          </h1>
-          <p class="text-xl md:text-3xl cursor-default font-serif text-chalkpapyrus mb-8">
-            Very developer indeed, with a lot of developing
-          </p>
-        </span>
-      </div>
-      
-      <!-- Right side on "shelf" -->
-      <div class="absolute top-0 right-0 h-full w-1/2 bg-chalkpapyrus/90 wavy-edge">
-        <!-- Content for right side -->
-        <div class="h-full flex items-center justify-center">
-          <!-- *** -->
-        </div>
-      </div>
-    </section>
+                  bg-repeat bg-center'
+	>
+		<div class="w-full xl:max-w-9/10 mx-auto h-full flex flex-col lg:flex-row">
+			<!-- Left side -->
+			<div class="relative z-10 mt-auto mb-18 text-left mx-5">
+				<div class="relative z-10 my-14 flex justify-center items-center lg:items-left lg:justify-start">
+					<img
+						src="/static/assets/heroimage.png"
+						alt="My face!"
+						class="object-contain max-h-[20vh] w-auto rounded-2xl shadow-xl transition-all duration-700 hover:duration-500 delay-200 hover:delay-0 hover:scale-[1.2] saturate-90 hover:saturate-100 border-5 border-chalkpapyrus/60 hover:border-orange-300/75"
+					/>
+				</div>
+				<h1 class="text-4xl md:text-5xl font-chonburi text-chalkpapyrus text-outline text-center lg:text-left">
+					@slowBurnText("Developer, Programmer, Software Guy, Coder")
+				</h1>
+				<p class="text-xl md:text-3xl cursor-default font-lexend text-chalkpapyrus text-outline-sm my-6 text-justify lg:text-left">
+					I am developing very developer developments, let's connect! 
+				</p>
+			</div>
+		</div>
+	</section>
 }
 
 templ slowBurnText(text string) {
-
-        for i, char := range text {
-            <span class={ fmt.Sprintf("char char-%d hover:text-orange-300 transition-initial-none cursor-default transition-colors duration-[3000ms] hover:duration-50", i) }>{ string(char) }</span>
-        }
-    
+	for i, char := range text {
+		<span class={ fmt.Sprintf("char char-%d hover:text-orange-300 transition-initial-none cursor-default transition-colors duration-[3000ms] hover:duration-50", i) }>{ string(char) }</span>
+	}
 }
