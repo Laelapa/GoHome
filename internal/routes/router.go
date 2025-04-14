@@ -24,6 +24,7 @@ func Setup(staticDir string, logger *zap.SugaredLogger) *http.ServeMux {
 	mux.Handle("GET /static/", fileServer)
 	mux.HandleFunc("GET /", h.HandleGetHome)
 	mux.HandleFunc("GET /about", h.HandleGetAbout)
+	mux.HandleFunc("GET /stack", h.HandleGetStack)
 	mux.HandleFunc("GET /health", h.HandleGetHealth)
 
 	return mux
