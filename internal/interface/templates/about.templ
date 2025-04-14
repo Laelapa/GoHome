@@ -1,0 +1,44 @@
+package templates
+
+templ About() {
+	<body>
+		@head("Laelapa")
+		@bg() {
+			@nav()
+			@aboutContent()
+		}
+	</body>
+}
+
+templ aboutContent() {
+	<div class="w-full xl:max-w-9/10 mx-auto xl:h-full max-h-screen flex flex-col items-baseline justify-items-start  xl:items-center xl:justify-center">
+		<div class="relative w-full xl:w-3/4 max-h-9/10 xl:max-h-3/4 mt-22 xl:mt-15 mb-5 lg:w-2/3 mx-auto px-10 py-8 bg-white/10 backdrop-brightness-97 backdrop-blur-sm rounded-lg shadow-lg border border-white/30 overflow-y-auto pb-8 flex">
+			<div class="w-full h-full mx-2 py-4">
+				<h1 class="text-4xl md:text-5xl font-chonburi font-bold text-chalkpapyrus text-outline text-Left mb-6">
+					@slowBurnText("About Me")
+				</h1>
+				<p class="text-xl xl:text-2xl font-lexend text-chalkpapyrus text-outline-sm mb-4 text-justify md:text-left">
+					My name is <span class="text-orange-300">Demetrius Papas</span>.
+				</p>
+				<p class="text-xl xl:text-2xl font-montserrat text-chalkpapyrus text-outline-sm mb-4 text-justify md:text-left">
+					paragraph: uni
+				</p>
+				<p class="text-xl xl:text-2xl font-montserrat text-chalkpapyrus text-outline-sm mb-4 text-justify md:text-left">
+					paragraph: internship
+				</p>
+				<p class="text-xl xl:text-2xl font-montserrat text-chalkpapyrus text-outline-sm mb-4 text-justify md:text-left">
+					paragraph: personal interests
+				</p>
+				<p class="text-xl xl:text-2xl font-montserrat text-chalkpapyrus text-outline-sm mb-4 text-justify md:text-left">
+					paragraph: personal studies & projects
+				</p>
+				<p class="text-xl xl:text-2xl font-montserrat text-chalkpapyrus text-outline-sm mb-4 text-justify md:text-left">
+					paragraph: character & motivations
+				</p>
+				<p class="text-xl xl:text-2xl font-montserrat text-chalkpapyrus text-outline-sm text-justify md:text-left">
+					paragraph: character traits
+				</p>
+			</div>
+		</div>
+	</div>
+}

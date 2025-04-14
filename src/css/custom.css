@@ -22,6 +22,14 @@
     1px 1px 0 var(--color-neutral-400);
 }
 
+.text-outline-intense {
+  text-shadow:
+  -0.5px -0.5px 0 var(--color-blue-800),
+  0.5px -0.5px 0 var(--color-blue-800),
+  -0.5px 0.5px 0 var(--color-blue-800),
+  0.5px 0.5px 0 var(--color-blue-800);
+}
+
 .text-outline-sm {
   text-shadow:
     -0.5px -0.5px 0 var(--color-stone-400),

@@ -1,0 +1,9 @@
+package templates
+
+import "fmt"
+
+templ slowBurnText(text string) {
+	for i, char := range text {
+		<span class={ fmt.Sprintf("char char-%d hover:text-orange-300 transition-initial-none cursor-default transition-colors duration-[3000ms] hover:duration-50", i) }>{ string(char) }</span>
+	}
+}
