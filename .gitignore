@@ -51,7 +51,6 @@ pgdump/*.sql
 docs/dev/
 
 # Static origin files
-static/
 static/assets/archive/
 
 # Compiled binaries
