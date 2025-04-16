@@ -32,10 +32,10 @@
 
 .text-outline-sm {
   text-shadow:
-    -0.5px -0.5px 0 var(--color-stone-400),
-    0.5px -0.5px 0 var(--color-stone-400),
-    -0.5px 0.5px 0 var(--color-stone-400),
-    0.5px 0.5px 0 var(--color-stone-400);
+    -0.5px -0.5px 0 var(--color-stone-500/90),
+    0.5px -0.5px 0 var(--color-stone-500/90),
+    -0.5px 0.5px 0 var(--color-stone-500/90),
+    0.5px 0.5px 0 var(--color-stone-500/90);
 }
 
 .text-outline-cursive {
