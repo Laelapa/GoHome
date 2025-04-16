@@ -16,20 +16,11 @@ func (h *Handler) HandleGetHome(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
 
 	if err := templates.Home().Render(r.Context(), w); err != nil {
-		h.Logger.Errorw("Failed to render home page",
-		"method", r.Method,
-		"path", r.URL.Path,
-		"remote_addr", r.RemoteAddr,
-		"error", err,
-	)
+		h.LogError("Failed to render home page", r, err)
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 		return
 
 	}
 
-	h.Logger.Infow("Rendered: Home page",
-	"method", r.Method,
-	"path", r.URL.Path,
-	"remote_addr", r.RemoteAddr,
-	)
+	h.LogInfo("Rendered: Home page", r)
 }

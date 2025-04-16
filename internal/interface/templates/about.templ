@@ -1,0 +1,60 @@
+package templates
+
+templ About() {
+	<body>
+		@head("Laelapa")
+		@bg() {
+			@nav()
+			@aboutContent()
+		}
+	</body>
+}
+
+templ aboutContent() {
+	<div class="w-full xl:max-w-9/10 mx-auto xl:h-full max-h-screen flex flex-col items-baseline justify-items-start  xl:items-center xl:justify-center">
+		<div class="relative w-full xl:w-3/4 max-h-9/10 mt-22 xl:mt-15 mb-5 lg:w-2/3 mx-auto px-10 py-8 bg-green-900/10 backdrop-brightness-97 backdrop-blur-sm rounded-lg shadow-lg border border-white/30 overflow-y-auto pb-8 flex">
+			<div class="w-full h-full mx-2 py-4">
+				<h1 class="text-4xl md:text-5xl font-pacifico font-bold text-orange-300 text-shadow-sm text-Left mb-6">
+					About Me
+				</h1>
+				<p class="text-xl xl:text-2xl font-lexend text-chalkpapyrus text-outline-sm mb-8 text-justify md:text-left">
+					My name is <span class="text-orange-300 text-shadow-xs">Demetrius Papas</span>. I am a software developer with a passion for figuring things out and an intrinsic motivation for doing things right.
+				</p>
+				<p class="text-xl font-montserrat text-chalkpapyrus text-outline-sm mb-4 text-justify md:text-left">
+					I've studied software development at a university level, having completed ~200 ECTS of courses on Computer & Software Engineering at the <a href="https://en.wikipedia.org/wiki/Polytechnic_(Greece)" target="_blank" rel="noopener noreferrer" class="underline">Polytechnic School</a> of the <a href="https://www.uth.gr/en" target="_blank" rel="noopener noreferrer" class="text-orange-300 hover:text-orange-400 font-bold text-shadow-xs">University of Thessaly</a>, Greece, gaining a solid foundation of formal knowledge.
+				</p>
+				<p class="text-xl font-montserrat text-chalkpapyrus text-outline-sm mb-4 text-justify md:text-left">
+					During my studies I interned at <a href="https://centaur.ag/" target="_blank" rel="noopener noreferrer" class="text-orange-300 font-bold hover:text-orange-400 text-shadow-xs">Centaur Analytics</a> where I had the opportunity to familiarize myself with the software development lifecycle in a professional setting. Under the guidance of a team of very talented people I undertook the development of an api consumer tool for internal use, with nodejs, express & MongoDB. Following test driven development practices was a formative experience for me at those early stages of my technical progression.
+				</p>
+				<p class="text-xl font-montserrat text-chalkpapyrus text-outline-sm mb-4 text-justify md:text-left">
+					I am particularly drawn to developing APIs, services, tools and applications but I actively pursue expanding my encyclopedic knowledge and staying up-to-date with how the field of software development is evolving throughout all of its facets outside my direct ecosystem too. 
+				</p>
+				<p class="text-xl font-montserrat text-chalkpapyrus text-outline-sm mb-4 text-justify md:text-left">
+					Pursuing my interests further, I studied back-end web development principles and learnt <span class="font-lexend text-shadow-xs text-sky-300">Go</span> on <a href="https://boot.dev" target="_blank" rel="noopener" class="text-orange-300 hover:text-purple-600/50 font-bold text-shadow-xs">boot.dev</a>, which is an exceptional platform that I would unreservedly recommend to anyone. There I completed several guided projects such as building a microblogging service and I've since been applying the skills that I acquired there to develop more complex web application projects with a focus on further familiarizing myself with industry standard libraries, software & services such as Apache Kafka, Prometheus and Grafana. I am proficient with essential development infrastructure: version control, containerization with docker/podman, CI/CD pipelines etc.
+				</p>
+				<p class="text-xl font-montserrat text-chalkpapyrus text-outline-sm mb-4 text-justify md:text-left">
+					Widening my horizons & dispelling the "fog-of-war", if you will, is a big part of my motivation. Similarly, I am wired to dig deep and really try to get to the bottom of stuff. I find joy in the learning, the mastering, and the productive process itself.
+				</p>
+				<p class="text-xl font-montserrat text-chalkpapyrus text-outline-sm mb-4 text-justify md:text-left">
+					I strive to be sensible and purposeful with my decisions. I have a preference for planning and figuring things out, trying to be proactive about the potential pitfalls of a project and technical debt in general, as opposed to being trigger-happy with an implementation and then iterating reactively. I don't criticize the latter approach though, I would arguably benefit from it if it would come to me more naturally a little more often. No tool is the right one for every job after all, and I am not a fan of dogma either. As a natural consequence of this I highly value collaboration and exposure to other people's perspectives that challenge my own thinking and processes.
+				</p>
+				<p class="text-xl font-montserrat text-chalkpapyrus text-outline-sm mb-12 text-justify md:text-left">
+					I am excited to explore new opportunities where I can apply these perspectives professionally and continue growing as a developer. If you think my approach would complement your team, I'd be glad to connect and discuss potential collaborations.
+				</p>
+				<p class="text-xl font-montserrat text-chalkpapyrus text-outline-sm mb-12 flex items-center gap-2 text-justify md:text-left">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="fill-chalkpapyrus"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4.7-8 5.334L4 8.7V6.297l8 5.333 8-5.333V8.7z"></path></svg>
+					<span class="group relative inline-block">
+						<span class="text-chalkpapyrus font-lexend text-shadow-xs">papas․demetrius＠gmail․com</span>
+						<span class="invisible absolute z-10 -translate-y-full -translate-x-1/2 top-0 left-1/2 w-max max-w-xs rounded-lg bg-green-900/80 backdrop-blur-sm border border-white/30 p-2 text-chalkpapyrus text-sm opacity-0 transition-opacity group-hover:visible group-hover:opacity-100">
+							Both the periods and the ＠ symbol have been replaced with doppelgangers 😉
+						</span>
+					</span>
+					<a href="https://lea.verou.me/blog/2009/11/yet-another-email-hiding-technique/" target="_blank" rel="noopener" class="underline text-orange-300 text-shadow-xs">(do NOT copy & paste the address, just retype it)</a>
+				</p>
+				<div class="pb-4 xl:pb-0">
+					@connect()
+				</div>
+			</div>
+		</div>
+	</div>
+}

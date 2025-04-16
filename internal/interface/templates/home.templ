@@ -3,7 +3,9 @@ package templates
 templ Home() {
     <body>
     @head("Laelapa")
-    @nav()
-    @hero()
+    @bg() {
+        @nav()
+        @hero()
+    }
     </body>
 }

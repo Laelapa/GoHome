@@ -1,13 +1,32 @@
 package templates
 
 templ head(title string) {
-    <head>
-        <title>{ title }</title>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="/static/css/style.css" />
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Lexend+Exa:wght@100..900&display=swap" rel="stylesheet">
-    </head>
+	<head>
+		<title>{ title }</title>
+		<meta charset="UTF-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<link rel="stylesheet" href="/static/css/style.css"/>
+		<link rel="preconnect" href="https://fonts.googleapis.com"/>
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+		<link href="https://fonts.googleapis.com/css2?family=Chonburi&family=Lexend+Exa:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Pacifico&display=swap" rel="stylesheet"/>
+		<script>
+            document.addEventListener('DOMContentLoaded', () => {
+              document.querySelectorAll('.char').forEach(el => {
+                el.classList.remove('transition-initial-none');
+              });
+            });
+        </script>
+	</head>
+}
+
+// This template provides the background pattern, nest other templates inside it
+templ bg() {
+	<section
+		class='relative h-screen 
+                  bg-[#65ab72] 
+                  bg-[url("data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20width=%2724%27%20height=%2724%27%20viewBox=%270%200%2024%2024%27%3E%3Cg%20fill=%27%23fae59f%27%20fill-opacity=%270.19%27%3E%3Cpolygon%20fill-rule=%27evenodd%27%20points=%278%204%2012%206%208%208%206%2012%204%208%200%206%204%204%206%200%208%204%27/%3E%3C/g%3E%3C/svg%3E")] 
+                  bg-repeat bg-center'
+	>
+		{ children... }
+	</section>
 }

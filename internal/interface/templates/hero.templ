@@ -1,27 +1,61 @@
 package templates
 
+// FIXME: Consider the cases of constrained viewport height, right now text is overflowing everywhere when things get tight on y axis.
 templ hero() {
-    <section class='relative h-screen 
-                  bg-[#65ab72] 
-                  bg-[url("data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20width=%2724%27%20height=%2724%27%20viewBox=%270%200%2024%2024%27%3E%3Cg%20fill=%27%23fae59f%27%20fill-opacity=%270.19%27%3E%3Cpolygon%20fill-rule=%27evenodd%27%20points=%278%204%2012%206%208%208%206%2012%204%208%200%206%204%204%206%200%208%204%27/%3E%3C/g%3E%3C/svg%3E")] 
-                  bg-repeat bg-center'>
-    <div class="max-w-screen-xl mx-auto flex flex-col md:flex-row justify-center items-center h-full">
-      <!-- First box (positioned absolutely at the bottom left) -->
-      <div class="md:absolute md:bottom-24 md:left-48">
-        <span class="text-left">
-          <h1 class="text-4xl md:text-6xl font-bold font-serif text-chalkpapyrus mb-4">
-            Developer, Programmer, Software Guy, Coder
-          </h1>
-          <p class="text-xl md:text-2xl font-serif text-chalkpapyrus mb-8">
-            Very developer indeed, with a lot of developing
-          </p>
-        </span>
-      </div>
-      <!-- Second box -->
-      <div class="container mx-auto px-6 justify-center items-center text-center md:mx-4">
-        <!-- img src="***" class="w-full max-w-md mx-auto" -->
-        <!-- div class="justify-center items-center w-120 h-120 mask-cover mask-[url('***')] bg-[url('***')]"></div -->
-      </div>
-    </div>
-  </section>
+	<div class="w-full xl:max-w-9/10 mx-auto xl:h-full max-h-screen overflow-y-auto flex flex-col xl:flex-row">
+		<!-- Left side -->
+		<div class="relative z-10 xl:mt-auto mt-20 xl:mb-20 text-left mx-5 2xl:pr-20 xl:pr-10">
+			<div class="relative z-10 my-20 xl:my-16 flex justify-center items-center xl:items-left xl:justify-start">
+				<img
+					src="/static/assets/heroimage.png"
+					alt="My face!"
+					class="object-contain max-h-[30vh] xl:max-h-[20vh] w-auto rounded-2xl shadow-xl transition-all duration-700 hover:duration-500 delay-200 hover:delay-0 xl:hover:scale-[2.0] hover:scale-[1.3] saturate-90 hover:saturate-100 border-5 border-chalkpapyrus/70 hover:border-sky-950/50 xl:origin-bottom-left"
+				/>
+			</div>
+			<h1 class="text-4xl md:text-6xl font-pacifico text-chalkpapyrus text-shadow-sm text-center xl:text-left">
+				@slowBurnText("Process-Driven Developer, ")
+			</h1>
+			<h1 class="text-3xl md:text-5xl font-pacifico text-chalkpapyrus text-shadow-sm mt-6 text-center xl:text-left">
+				@slowBurnText("Seeking knowledge & mastery for the sake of it. ")
+			</h1>
+			<p class="text-2xl md:text-3xl cursor-default font-lexend text-chalkpapyrus text-outline-sm mt-14 text-center xl:text-left">
+				Motivated by genuine interest, guided by thoroughness,
+			</p>
+			<p class="text-2xl md:text-3xl cursor-default font-lexend text-chalkpapyrus text-outline-sm mb-6 text-center xl:text-left">
+				enjoying every part of the journey.
+			</p>
+			<p class="text-2xl md:text-3xl cursor-default font-lexend text-chalkpapyrus text-outline-sm mb-8 xl:mb-0 text-left">
+				@connect()
+			</p>
+		</div>
+		<!-- Right side -->
+		<div class="relative z-10 w-full xl:w-1/2 flex flex-col pt-10 justify-start 2xl:justify-center items-center backdrop-blur-xl backdrop-brightness-97 xl:max-h-screen xl:overflow-y-auto">
+			<div class="w-full max-w-4xl px-6 py-8">
+				<p class="text-xl xl:text-3xl font-lexend text-chalkpapyrus text-outline-sm text-justify md:text-left">
+					Hey! It's 
+					<span class="text-4xl xl:text-5xl font-pacifico text-orange-300 text-shadow-xs text-center xl:text-left">
+						Demetrius
+					</span>,
+				</p>
+				<p class="text-xl xl:text-2xl font-lexend text-chalkpapyrus text-outline-sm mb-10 text-justify md:text-left">
+					welcome to my personal website!
+				</p>
+				<p class="text-xl xl:text-2xl font-lexend text-chalkpapyrus text-outline-sm mb-10 text-justify md:text-left">
+					Here I host my collection of insights on software development, technical explorations, and occasional diversions into other topics that captivate my interest.
+				</p>
+				<p class="text-xl xl:text-2xl font-montserrat text-chalkpapyrus text-outline-sm mb-4 text-justify md:text-left">
+					I am a developer with an affinity for deep-diving into intriguing subjects, chasing down holistic knowledge, and probably overanalyzing, overdesigning and overconsidering specifications to a fault before I commit to an implementation. I want to see the big picture and I also love figuring out the details. 
+				</p>
+				<p class="text-xl xl:text-2xl font-montserrat text-chalkpapyrus text-outline-sm mb-4 text-justify md:text-left">
+					I find a lot of value, and enjoyment, in the process of things; gathering meaningful knowledge across domains and gradually developing mastery through persistent practice. 
+				</p>
+				<p class="text-xl xl:text-2xl font-montserrat text-chalkpapyrus text-outline-sm mb-12 text-justify md:text-left">
+					There is great fulfillment to be had in experiencing your own growth and progress along a journey that brings you such delight.
+				</p>
+				<p class="text-xl xl:text-2xl font-montserrat text-chalkpapyrus text-outline-sm mb-4 text-justify md:text-left">
+					Read some more details <a href="/about" class="text-orange-300 hover:text-orange-400 text-shadow-xs">about me</a>.
+				</p>
+			</div>
+		</div>
+	</div>
 }
