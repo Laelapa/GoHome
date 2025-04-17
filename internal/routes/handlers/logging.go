@@ -10,6 +10,7 @@ func (h *Handler) LogInfo(msg string, r *http.Request) {
 		"method", r.Method,
 		"path", r.URL.Path,
 		"remote_addr", r.RemoteAddr,
+		"referer", r.Referer(),
 	)
 }
 
@@ -19,6 +20,7 @@ func (h *Handler) LogError(msg string, r *http.Request, err error) {
 		"method", r.Method,
 		"path", r.URL.Path,
 		"remote_addr", r.RemoteAddr,
+		"referer", r.Referer(),
 		"error", err,
 	)
 }

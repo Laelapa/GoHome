@@ -1,8 +1,8 @@
 package templates
 
-templ Stack() {
+templ Stack(title string, canonDomain string, canonPath string) {
+	@head(title, canonDomain, canonPath)
 	<body>
-		@head("Laelapa - Demetrius Papas - Tech Stack")
 		@bg() {
 			@nav()
 			@stackContent()

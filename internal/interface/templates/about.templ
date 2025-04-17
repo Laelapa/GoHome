@@ -1,8 +1,8 @@
 package templates
 
-templ About() {
+templ About(title string, canonDomain string, canonPath string) {
+	@head(title, canonDomain, canonPath)
 	<body>
-		@head("Laelapa - Demetrius Papas - About")
 		@bg() {
 			@nav()
 			@aboutContent()

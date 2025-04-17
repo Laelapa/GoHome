@@ -1,10 +1,10 @@
 package templates
 
-templ UnderConstruction() {
+templ UnderConstruction(title string, canonDomain string, canonPath string) {
+	@head(title, canonDomain, canonPath)
 	<body>
-		@head("Laelapa - Demetrius Papas")
 		@bg() {
-            @nav()
+			@nav()
 			@underConstructionContent()
 		}
 	</body>

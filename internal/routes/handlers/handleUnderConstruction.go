@@ -9,7 +9,7 @@ import (
 func (h *Handler) HandleUnderConstruction(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html")
 
-	if err := templates.UnderConstruction().Render(r.Context(), w); err != nil {
+	if err := templates.UnderConstruction("Laelapa - Under Construction", "laelapa.fly.dev", r.URL.Path).Render(r.Context(), w); err != nil {
 		h.LogError("Failed to render under construction page", r, err)
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 		return

@@ -1,6 +1,6 @@
 package templates
 
-templ head(title string) {
+templ head(title string, canonDomain string, canonPath string) {
 	<head>
 		<meta charset="UTF-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -9,8 +9,10 @@ templ head(title string) {
 		<meta name="description" content="Personal website, portfolio & blog of Demetrius Papas - Software Developer specializing in APIs, services and back-end development with Go"/>
 		<meta name="author" content="Demetrius Papas"/>
 		<meta name="keywords" content="Demetrius Papas, Laelapa, software developer, developer, web developer, swe, dev, Go, Golang, API, APIs, services, microservices, web services, back-end development, backend, back-end, portfolio, blog"/>
+		<link rel="canonical" href={ "https://" + canonDomain + canonPath }/>
 		<meta name="robots" content="index, follow"/>
 		<!-- open graph / socials -->
+		<meta property="og:url" content={ "https://" + canonDomain + canonPath }/>
 		<meta property="og:type" content="website"/>
 		<meta property="og:title" content="Laelapa - Demetrius Papas"/>
 		<meta property="og:description" content="Personal website, portfolio & blog of Demetrius Papas - Software Developer specializing in APIs, services and back-end development with Go"/>
