@@ -1,6 +1,3 @@
-# If you prefer the allow list template instead of the deny list, see community template:
-# https://github.com/github/gitignore/blob/main/community/Golang/Go.AllowList.gitignore
-#
 # Binaries for programs and plugins
 *.exe
 *.exe~
@@ -63,4 +60,4 @@ bin/
 .directory
 
 # Deployment files
-# fly.toml # gh actions needs to source this for fly.io deployment
+fly.toml

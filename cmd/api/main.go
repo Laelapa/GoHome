@@ -12,8 +12,6 @@ import (
 
 	"github.com/Laelapa/GoHome/internal/app"
 	"github.com/Laelapa/GoHome/internal/logging"
-
-	"github.com/joho/godotenv"
 )
 
 // main serves as the entry point for the application and acts as a thin wrapper
@@ -37,10 +35,16 @@ func run() error {
 	ctx, cancel := signal.NotifyContext(context.Background(), os.Interrupt)
 	defer cancel()
 
-	err := godotenv.Load()
-	if err != nil {
-		return fmt.Errorf("error loading .env file: %w", err) // FIXME: add error handling
-	}
+	// FIXME: add error handling, automate loading of .env file or pulling from secrets manager
+	//
+	// Disabled for production, use your service's secrets instead
+	// Refer to the dotenv example file for the required environment variables
+	// Uncomment the following lines to load environment variables from a .env file in a local development environment
+	//
+	// err := godotenv.Load()
+	// if err != nil {
+	// 	return fmt.Errorf("error loading .env file: %w", err)
+	// }
 
 	logger, err := logging.NewLogger(os.Getenv("ENVIRONMENT"))
 	if err != nil {
@@ -71,8 +75,6 @@ func run() error {
 	if err = app.LaunchServer(); err != nil {
 		return fmt.Errorf("error launching server: %w", err) // FIXME: add error handling
 	}
-
-	
 
 	return nil
 }

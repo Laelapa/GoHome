@@ -6,7 +6,7 @@ install-tailwind-linux:
 
 .PHONY: tailwind-generate
 tailwind-generate:
-	./tailwindcss -i ./src/css/custom.css -o ./static/css/style.css
+	./tailwindcss -i ./src/css/custom.css -o ./static/css/style.css --minify
 
 .PHONY: tailwind-watch
 tailwind-watch:
