@@ -63,4 +63,4 @@ bin/
 .directory
 
 # Deployment files
-fly.toml
+# fly.toml # gh actions needs to source this for fly.io deployment
