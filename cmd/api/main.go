@@ -12,8 +12,6 @@ import (
 
 	"github.com/Laelapa/GoHome/internal/app"
 	"github.com/Laelapa/GoHome/internal/logging"
-
-	"github.com/joho/godotenv"
 )
 
 // main serves as the entry point for the application and acts as a thin wrapper
@@ -45,7 +43,7 @@ func run() error {
 	//
 	// err := godotenv.Load()
 	// if err != nil {
-	// 	return fmt.Errorf("error loading .env file: %w", err) 
+	// 	return fmt.Errorf("error loading .env file: %w", err)
 	// }
 
 	logger, err := logging.NewLogger(os.Getenv("ENVIRONMENT"))
@@ -77,8 +75,6 @@ func run() error {
 	if err = app.LaunchServer(); err != nil {
 		return fmt.Errorf("error launching server: %w", err) // FIXME: add error handling
 	}
-
-	
 
 	return nil
 }
