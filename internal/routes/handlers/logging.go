@@ -35,5 +35,5 @@ func getClientIP(r *http.Request) string {
 		return clientIP
 	}
 	// Fallback to the remote address
-	return r.RemoteAddr
+	return "fly.io r-proxy: " + r.RemoteAddr
 }
