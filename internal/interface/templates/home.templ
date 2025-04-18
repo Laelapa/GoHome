@@ -1,9 +1,11 @@
 package templates
 
 templ Home() {
+    @head("Laelapa - Demetrius Papas", "laelapa.fly.dev", "/")
     <body>
-    @head("Laelapa")
-    @nav()
-    @hero()
+    @bg() {
+        @nav()
+        @hero()
+    }
     </body>
 }

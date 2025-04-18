@@ -1,13 +1,53 @@
 package templates
 
-templ head(title string) {
-    <head>
-        <title>{ title }</title>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="/static/css/style.css" />
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Lexend+Exa:wght@100..900&display=swap" rel="stylesheet">
-    </head>
+templ head(title string, canonDomain string, canonPath string) {
+	<head>
+		<meta charset="UTF-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<title>{ title }</title>
+		<meta name="language" content="English"/>
+		<meta name="description" content="Personal website, portfolio & blog of Demetrius Papas - Software Developer specializing in APIs, services and back-end development with Go"/>
+		<meta name="author" content="Demetrius Papas"/>
+		<meta name="keywords" content="Demetrius Papas, Laelapa, software developer, developer, web developer, swe, dev, Go, Golang, API, APIs, services, microservices, web services, back-end development, backend, back-end, portfolio, blog"/>
+		<link rel="canonical" href={ "https://" + canonDomain + canonPath }/>
+		<meta name="robots" content="index, follow"/>
+		<!-- open graph / socials -->
+		<meta property="og:url" content={ "https://" + canonDomain + canonPath }/>
+		<meta property="og:type" content="website"/>
+		<meta property="og:title" content="Laelapa - Demetrius Papas"/>
+		<meta property="og:description" content="Personal website, portfolio & blog of Demetrius Papas - Software Developer specializing in APIs, services and back-end development with Go"/>
+		<meta name="twitter:title" content="Laelapa - Demetrius Papas"/>
+		<meta name="twitter:description" content="Personal website, portfolio & blog of Demetrius Papas - Software Developer specializing in APIs, services and back-end development with Go"/>
+		<!-- favicons -->
+		<link rel="icon" href="/static/icons/favicon.ico"/>
+		<link rel="icon" type="image/png" sizes="32x32" href="/static/icons/favicon-32x32.png"/>
+		<link rel="icon" type="image/png" sizes="16x16" href="/static/icons/favicon-16x16.png"/>
+		<link rel="apple-touch-icon" sizes="180x180" href="/static/icons/apple-touch-icon.png"/>
+		<link rel="manifest" href="/static/icons/site.webmanifest"/>
+		<!-- stylesheets / fonts -->
+		<link rel="stylesheet" href="/static/css/style.css"/>
+		<link rel="preconnect" href="https://fonts.googleapis.com"/>
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+		<link href="https://fonts.googleapis.com/css2?family=Chonburi&family=Lexend+Exa:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Pacifico&display=swap" rel="stylesheet"/>
+		<!-- scripts -->
+		<script>
+            document.addEventListener('DOMContentLoaded', () => {
+              document.querySelectorAll('.char').forEach(el => {
+                el.classList.remove('transition-initial-none');
+              });
+            });
+        </script>
+	</head>
+}
+
+// This template provides the background pattern, nest other templates inside it
+templ bg() {
+	<section
+		class='relative h-screen 
+                  bg-[#65ab72] 
+                  bg-[url("data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20width=%2724%27%20height=%2724%27%20viewBox=%270%200%2024%2024%27%3E%3Cg%20fill=%27%23fae59f%27%20fill-opacity=%270.19%27%3E%3Cpolygon%20fill-rule=%27evenodd%27%20points=%278%204%2012%206%208%208%206%2012%204%208%200%206%204%204%206%200%208%204%27/%3E%3C/g%3E%3C/svg%3E")] 
+                  bg-repeat bg-center'
+	>
+		{ children... }
+	</section>
 }

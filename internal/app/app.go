@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/Laelapa/GoHome/internal/routes"
+	"github.com/Laelapa/GoHome/internal/middleware"
 	"go.uber.org/zap"
 )
 
@@ -62,7 +63,8 @@ func newMux(staticDir string, logger *zap.SugaredLogger) http.Handler {
 // functions used across all routes.
 func attachBasicMiddleware(handler http.Handler) http.Handler {
 
-	// TODO: handler = middleware(handler)
+	handler = middleware.SecurityResponseHeaders(handler)
+	handler = middleware.CacheControlHeader(handler)
 
 	return handler
 }
