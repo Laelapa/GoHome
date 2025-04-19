@@ -56,15 +56,16 @@ func New(
 // and middleware attached.
 func newMux(staticDir string, logger *zap.SugaredLogger) http.Handler {
 	mux := routes.Setup(staticDir, logger)
-	return attachBasicMiddleware(mux)
+	return attachBasicMiddleware(mux, logger)
 }
 
 // attachBasicMiddleware wraps the provided handler with common middleware
 // functions used across all routes.
-func attachBasicMiddleware(handler http.Handler) http.Handler {
+func attachBasicMiddleware(handler http.Handler, logger *zap.SugaredLogger) http.Handler {
 
 	handler = middleware.SecurityResponseHeaders(handler)
 	handler = middleware.CacheControlHeader(handler)
+	handler = middleware.RequestLogger(handler, logger)
 
 	return handler
 }

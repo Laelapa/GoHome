@@ -1,31 +1,25 @@
-package handlers
+package middleware
 
 import (
 	"net/http"
 	"strings"
+
+	"go.uber.org/zap"
 )
 
-func (h *Handler) LogInfo(msg string, r *http.Request) {
-	h.Logger.Infow(
-		msg,
-		"method", r.Method,
-		"path", sanitizeLogValue(r.URL.Path),
-		"remote_addr", getClientIP(r),
-		"referer", sanitizeLogValue(r.Referer()),
-	)
+func RequestLogger( next http.Handler, logger *zap.SugaredLogger) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		logger.Infow("HTTP Request",
+			"method", r.Method,
+			"path", sanitizeLogValue(r.URL.Path),
+			"remoteAddr", getClientIP(r),
+			"referer", sanitizeLogValue(r.Referer()),
+		)
+		next.ServeHTTP(w, r)
+	})
 }
 
-func (h *Handler) LogError(msg string, r *http.Request, err error) {
-	h.Logger.Errorw(
-		msg,
-		"method", r.Method,
-		"path", sanitizeLogValue(r.URL.Path),
-		"remote_addr", getClientIP(r),
-		"referer", sanitizeLogValue(r.Referer()),
-		"error", err,
-	)
-}
-
+// TODO: Eliminate code duplication between here & internal/routes/handlers/logging.go
 // TODO: Consider generalizing by using X-forwarded-for instead of Fly.io specific header.
 //
 // getClientIP retrieves the client IP address from the request if a reverse proxy is sitting in the middle.
