@@ -79,7 +79,7 @@ func attachBasicMiddleware(handler http.Handler, logger *logging.Logger) http.Ha
 func (app *App) SetServerShutdownTimeout(t time.Duration) {
 
 	app.serverOptions.shutdownTimeout = t
-	app.logger.Info(
+	app.logger.LogAppInfo(
 		"Server shutdown timeout set", 
 		zap.Duration("duration", t),
 	)
@@ -97,14 +97,12 @@ func (app *App) LaunchServer() error {
 
 	go func() {
 
-		app.logger.Info(
+		app.logger.LogAppInfo(
 			"Server running",
 			zap.String("server address", app.server.Addr),
 		)
 		if err := app.server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
-			app.logger.Error("Error thrown by ListenAndServe()", 
-			zap.Error(err),
-		)
+			app.logger.LogAppError("Error thrown by ListenAndServe()", err)
 			errChan <- err
 		}
 	}()
@@ -116,7 +114,7 @@ func (app *App) LaunchServer() error {
 
 	case <-app.ctx.Done():
 
-		app.logger.Info("Shutting down server")
+		app.logger.LogAppInfo("Shutting down server")
 		app.ShutdownServer()
 		return nil
 	}
@@ -131,11 +129,11 @@ func (app *App) ShutdownServer() {
 	defer cancel()
 
 	if err := app.server.Shutdown(ctxServerShutdown); err != nil && err != http.ErrServerClosed {
-		app.logger.Error("Error during server shutdown", zap.Error(err))
-		app.logger.Warn("Closing server forcefully")
+		app.logger.LogAppError("Error during server shutdown", err)
+		app.logger.LogAppWarn("Closing server forcefully")
 		app.server.Close()
 	} else {
-		app.logger.Info("Server shut down successfully")
+		app.logger.LogAppInfo("Server shut down successfully")
 	}
 
 }
