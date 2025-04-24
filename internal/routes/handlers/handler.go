@@ -1,8 +1,7 @@
 package handlers
 
-import "go.uber.org/zap"
+import "github.com/Laelapa/GoHome/internal/logging"
 
 type Handler struct {
-	Logger *zap.SugaredLogger
+	Logger *logging.Logger
 }
-

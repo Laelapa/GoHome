@@ -6,8 +6,9 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/Laelapa/GoHome/internal/routes"
+	"github.com/Laelapa/GoHome/internal/logging"
 	"github.com/Laelapa/GoHome/internal/middleware"
+	"github.com/Laelapa/GoHome/internal/routes"
 	"go.uber.org/zap"
 )
 
@@ -17,7 +18,7 @@ type serverOptions struct {
 
 type App struct {
 	ctx           context.Context
-	logger        *zap.SugaredLogger
+	logger        *logging.Logger
 	server        *http.Server
 	serverOptions *serverOptions
 }
@@ -34,7 +35,7 @@ type App struct {
 //   - shutdownTimeout: The duration to wait during shutdown before forcefully terminating
 func New(
 	ctx context.Context,
-	logger *zap.SugaredLogger,
+	logger *logging.Logger,
 	port string,
 	staticDir string,
 	shutdownTimeout time.Duration,
@@ -54,14 +55,14 @@ func New(
 
 // newMux creates and configures the HTTP request multiplexer with all routes
 // and middleware attached.
-func newMux(staticDir string, logger *zap.SugaredLogger) http.Handler {
+func newMux(staticDir string, logger *logging.Logger) http.Handler {
 	mux := routes.Setup(staticDir, logger)
 	return attachBasicMiddleware(mux, logger)
 }
 
 // attachBasicMiddleware wraps the provided handler with common middleware
 // functions used across all routes.
-func attachBasicMiddleware(handler http.Handler, logger *zap.SugaredLogger) http.Handler {
+func attachBasicMiddleware(handler http.Handler, logger *logging.Logger) http.Handler {
 
 	handler = middleware.SecurityResponseHeaders(handler)
 	handler = middleware.CacheControlHeader(handler)
@@ -78,7 +79,10 @@ func attachBasicMiddleware(handler http.Handler, logger *zap.SugaredLogger) http
 func (app *App) SetServerShutdownTimeout(t time.Duration) {
 
 	app.serverOptions.shutdownTimeout = t
-	app.logger.Infof("Server shutdown timeout set to %vns\n", t)
+	app.logger.Info(
+		"Server shutdown timeout set", 
+		zap.Duration("duration", t),
+	)
 }
 
 // LaunchServer starts the HTTP server and manages its lifecycle. It will run
@@ -93,9 +97,14 @@ func (app *App) LaunchServer() error {
 
 	go func() {
 
-		app.logger.Infof("Server running on %s", app.server.Addr)
+		app.logger.Info(
+			"Server running",
+			zap.String("server address", app.server.Addr),
+		)
 		if err := app.server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
-			app.logger.Errorf("Error by ListenAndServe(): %v\n", err)
+			app.logger.Error("Error thrown by ListenAndServe()", 
+			zap.Error(err),
+		)
 			errChan <- err
 		}
 	}()
@@ -107,7 +116,7 @@ func (app *App) LaunchServer() error {
 
 	case <-app.ctx.Done():
 
-		app.logger.Infof("Shutting down server\n")
+		app.logger.Info("Shutting down server")
 		app.ShutdownServer()
 		return nil
 	}
@@ -122,11 +131,11 @@ func (app *App) ShutdownServer() {
 	defer cancel()
 
 	if err := app.server.Shutdown(ctxServerShutdown); err != nil && err != http.ErrServerClosed {
-		app.logger.Errorf("Error during server shutdown: %v\n", err)
-		app.logger.Infof("Closing server forcefully\n")
+		app.logger.Error("Error during server shutdown", zap.Error(err))
+		app.logger.Warn("Closing server forcefully")
 		app.server.Close()
 	} else {
-		app.logger.Infof("Server shut down successfully\n")
+		app.logger.Info("Server shut down successfully")
 	}
 
 }
