@@ -63,7 +63,7 @@ func run() error {
 	shutdownTimeout, err := time.ParseDuration(os.Getenv("SERVER_SHUTDOWN_TIMEOUT") + "s")
 	if err != nil {
 		shutdownTimeout = 5 * time.Second // fallback default
-		logger.Warn("Failed to parse SERVER_SHUTDOWN_TIMEOUT, falling back to default", zap.Duration("shutdown timeout", shutdownTimeout))
+		logger.LogAppWarn("Failed to parse SERVER_SHUTDOWN_TIMEOUT, falling back to default", zap.Duration("shutdown timeout", shutdownTimeout))
 	}
 
 	app := app.New(

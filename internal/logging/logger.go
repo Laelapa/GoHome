@@ -1,7 +1,8 @@
 package logging
 
 import (
-	"errors"
+	"fmt"
+	"os"
 
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
@@ -11,44 +12,20 @@ type Logger struct {
 	*zap.Logger
 }
 
-// func NewLogger(env string) (*Logger, error) {
-
-// 	var logger *zap.Logger
-// 	var err error
-
-// 	if env == "prod" || env == "production" {
-// 		logger, err = zap.NewProduction() // TODO: setup production output
-// 	} else {
-// 		logger, err = zap.NewDevelopment()
-// 	}
-
-// 	if err != nil {
-// 		return nil, err
-// 	}
-
-// 	return &Logger{logger}, nil
-// }
-
 func NewLogger(env string) (*Logger, error) {
 	var config zap.Config
 
 	switch env {
 	case "dev", "development":
-		config = zap.NewDevelopmentConfig()
-		config.EncoderConfig.EncodeLevel = zapcore.CapitalColorLevelEncoder
+		config = setupDevConfig()
 	case "test", "testing":
-		config = zap.NewProductionConfig()
-		config.Level = zap.NewAtomicLevelAt(zap.DebugLevel)
-		config.Development = true
-		config.Sampling = nil
+		config = setupTestConfig()
 	case "prod", "production":
-		config = zap.NewProductionConfig()
-		config.InitialFields = map[string]interface{}{
-			"service": "gohome: Laelapa.dev",
-		}
+		config = setupProdConfig()
 	default:
-		return nil, errors.New("cannot initialize logger due to invalid environment")
-		// TODO: add default config
+		env = "dev"
+		fmt.Fprintf(os.Stderr, "WARNING: Unknown environment, defaulting to development\n")
+		config = setupDevConfig()
 	}
 
 	logger, err := config.Build(zap.AddCallerSkip(2))
@@ -63,4 +40,27 @@ func NewLogger(env string) (*Logger, error) {
 	)
 
 	return &Logger{logger}, nil
+}
+
+func setupDevConfig() zap.Config {
+	config := zap.NewDevelopmentConfig()
+	config.EncoderConfig.EncodeLevel = zapcore.CapitalColorLevelEncoder
+	return config
+}
+
+func setupTestConfig() zap.Config {
+	config := zap.NewProductionConfig()
+	config.Level = zap.NewAtomicLevelAt(zap.DebugLevel)
+	config.Development = true
+	config.Sampling = nil
+
+	return config
+}
+
+func setupProdConfig() zap.Config {
+	config := zap.NewProductionConfig()
+	config.InitialFields = map[string]interface{}{
+		"service": "gohome: Laelapa.dev",
+	}
+	return config
 }
