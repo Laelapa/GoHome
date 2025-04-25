@@ -22,6 +22,14 @@ func (l *Logger) LogRequestError(msg string, r *http.Request, err error) {
 
 
 func (l *Logger) buildRequestFields( r *http.Request) []zap.Field {
+
+	// nil check mainly in case of misconfigured tests
+	if r == nil {
+		return []zap.Field{
+			zap.String("error", "nil request"),
+		}
+	}
+
 	return []zap.Field{
 		zap.String("remoteAddr", getClientIP(r)),
 		zap.String("method", r.Method),
