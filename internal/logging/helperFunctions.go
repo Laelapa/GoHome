@@ -42,13 +42,14 @@ func sanitizeLogValue(v string) string {
 
 // Protects against flooding the logs with long strings
 //
-// maxLength: the maximum length in bytes of the string to log
+// maxLength: the maximum length in characters (runes) of the string to log
 func truncateLogValue(v string, maxLength int) string {
-	if len(v) <= maxLength {
+	vRuned := []rune(v)
+	if len(vRuned) <= maxLength {
 		return v
 	}
 
-	return v[:maxLength] + "... [truncated]"
+	return string(vRuned[:maxLength]) + "... [truncated]"
 }
 
 

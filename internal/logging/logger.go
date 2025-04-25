@@ -35,8 +35,8 @@ func NewLogger(env string) (*Logger, error) {
 
 	logger.Info(
 		"Logger initialized",
-		zap.String("environment", env),
-		zap.String("level", config.Level.String()),
+		zap.String(FieldEnvironment, env),
+		zap.String(FieldLoggingLevel, config.Level.String()),
 	)
 
 	return &Logger{logger}, nil
@@ -60,7 +60,8 @@ func setupTestConfig() zap.Config {
 func setupProdConfig() zap.Config {
 	config := zap.NewProductionConfig()
 	config.InitialFields = map[string]interface{}{
-		"service": "gohome: Laelapa.dev",
+		FieldService: "gohome: Laelapa.dev",
+		FieldEnvironment: "production",
 	}
 	return config
 }

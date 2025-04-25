@@ -31,9 +31,9 @@ func (l *Logger) buildRequestFields( r *http.Request) []zap.Field {
 	}
 
 	return []zap.Field{
-		zap.String("remoteAddr", getClientIP(r)),
-		zap.String("method", r.Method),
-		zap.String("path", filetLogValue(r.URL.Path)),
-		zap.String("referer", filetLogValue(r.Referer())),
+		zap.String(FieldRemoteAddr, getClientIP(r)),
+		zap.String(FieldMethod, r.Method),
+		zap.String(FieldPath, filetLogValue(r.URL.Path)),
+		zap.String(FieldReferer, filetLogValue(r.Referer())),
 	}
 }

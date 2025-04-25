@@ -81,7 +81,7 @@ func (app *App) SetServerShutdownTimeout(t time.Duration) {
 	app.serverOptions.shutdownTimeout = t
 	app.logger.LogAppInfo(
 		"Server shutdown timeout set", 
-		zap.Duration("duration", t),
+		zap.Duration(logging.FieldDuration, t),
 	)
 }
 
@@ -99,10 +99,10 @@ func (app *App) LaunchServer() error {
 
 		app.logger.LogAppInfo(
 			"Server running",
-			zap.String("server address", app.server.Addr),
+			zap.String(logging.FieldServerAddr, app.server.Addr),
 		)
 		if err := app.server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
-			app.logger.LogAppError("Error thrown by ListenAndServe()", err)
+			app.logger.LogAppError("Error thrown by ListenAndServe", err)
 			errChan <- err
 		}
 	}()
