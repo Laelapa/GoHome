@@ -39,30 +39,30 @@ run-watch: tailwind-watch-background
 .PHONY: docker-build docker-run docker-test docker-stop
 
 docker-build:
-    docker build -t gohome:local .
+	docker build -t gohome:local .
 
 # Run the container with proper environment variables
 docker-run:
-    docker stop gohome-local 2>/dev/null || true
-    docker rm gohome-local 2>/dev/null || true
-    docker run -d -p 8080:8080 \
-        -e ENVIRONMENT=production \
-        -e SERVER_PORT=8080 \
-        -e STATIC_DIR=/app/static \
-        -e SERVER_SHUTDOWN_TIMEOUT=5 \
-        --name gohome-local \
-        gohome:local
+	docker stop gohome-local 2>/dev/null || true
+	docker rm gohome-local 2>/dev/null || true
+	docker run -d -p 8080:8080 \
+		-e ENVIRONMENT=production \
+		-e SERVER_PORT=8080 \
+		-e STATIC_DIR=/app/static \
+		-e SERVER_SHUTDOWN_TIMEOUT=5 \
+		--name gohome-local \
+		gohome:local
 
 # View logs from the container
 docker-logs:
-    docker logs -f gohome-local
+	docker logs -f gohome-local
 
 # Build and run in one command
 docker-test: docker-build docker-run
-    @echo "Container running at http://localhost:8080"
-    @echo "View logs with: make docker-logs"
+	@echo "Container running at http://localhost:8080"
+	@echo "View logs with: make docker-logs"
 
 # Stop and remove the container
 docker-stop:
-    docker stop gohome-local 2>/dev/null || true
-    docker rm gohome-local 2>/dev/null || true
+	docker stop gohome-local 2>/dev/null || true
+	docker rm gohome-local 2>/dev/null || true
