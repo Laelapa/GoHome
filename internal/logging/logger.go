@@ -28,7 +28,7 @@ func NewLogger(env string) (*Logger, error) {
 		config = setupDevConfig()
 	}
 
-	logger, err := config.Build(zap.AddCallerSkip(2))
+	logger, err := config.Build(zap.AddCallerSkip(1))
 	if err != nil {
 		return nil, err
 	}
