@@ -24,7 +24,7 @@ func NewLogger(env string) (*Logger, error) {
 		config = setupProdConfig()
 	default:
 		env = "dev"
-		fmt.Fprintf(os.Stderr, "WARNING: Unknown environment, defaulting to development\n")
+		fmt.Fprintf(os.Stderr, "WARNING: Unknown environment, defaulting to development, potentially unsafe for use in production\n")
 		config = setupDevConfig()
 	}
 
