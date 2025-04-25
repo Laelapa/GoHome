@@ -40,6 +40,16 @@ func New(
 	staticDir string,
 	shutdownTimeout time.Duration,
 ) *App {
+
+	if port == "" {
+		logger.LogAppWarn("Port not specified, using default port 8080")
+		port = "8080"
+	}
+	if staticDir == "" {
+		logger.LogAppWarn("Static directory not specified, using default directory 'static'")
+		staticDir = "static"
+	}
+
 	return &App{
 		ctx:    ctx,
 		logger: logger,
