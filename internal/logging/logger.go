@@ -58,9 +58,15 @@ func setupTestConfig() zap.Config {
 }
 
 func setupProdConfig() zap.Config {
+
+	serviceName := os.Getenv("SERVICE_NAME")
+	if serviceName == "" {
+		serviceName = "GoHome"
+	}
+
 	config := zap.NewProductionConfig()
 	config.InitialFields = map[string]interface{}{
-		FieldService: "gohome: Laelapa.dev",
+		FieldService:     serviceName,
 		FieldEnvironment: "production",
 	}
 	return config
