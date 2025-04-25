@@ -11,7 +11,7 @@ import (
 	"time"
 
 	"github.com/Laelapa/GoHome/internal/app"
-	"github.com/Laelapa/GoHome/internal/logging"
+	"github.com/Laelapa/GoHome/logging"
 	"go.uber.org/zap"
 )
 
