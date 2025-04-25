@@ -6,9 +6,9 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/Laelapa/GoHome/internal/logging"
 	"github.com/Laelapa/GoHome/internal/middleware"
 	"github.com/Laelapa/GoHome/internal/routes"
+	"github.com/Laelapa/GoHome/logging"
 	"go.uber.org/zap"
 )
 
@@ -90,7 +90,7 @@ func (app *App) SetServerShutdownTimeout(t time.Duration) {
 
 	app.serverOptions.shutdownTimeout = t
 	app.logger.LogAppInfo(
-		"Server shutdown timeout set", 
+		"Server shutdown timeout set",
 		zap.Duration(logging.FieldDuration, t),
 	)
 }

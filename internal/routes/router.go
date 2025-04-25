@@ -3,7 +3,7 @@ package routes
 import (
 	"net/http"
 
-	"github.com/Laelapa/GoHome/internal/logging"
+	"github.com/Laelapa/GoHome/logging"
 	"github.com/Laelapa/GoHome/internal/routes/handlers"
 )
 
