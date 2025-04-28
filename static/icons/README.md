@@ -1,0 +1,1 @@
+Where you should put your favicons and android & apple application icons
