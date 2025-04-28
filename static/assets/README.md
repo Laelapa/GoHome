@@ -1,0 +1,1 @@
+This folder hosts whatever static files you intend to serve, such as your navbar logo, any static images displayed in the body of the webpage, fonts potentially in case you want to serve them yourself instead of through a cdn.
