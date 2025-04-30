@@ -1,0 +1,20 @@
+Laelapa/GoHome
+Copyright 2025 Demetrius Papas
+
+https://github.com/Laelapa/GoHome
+
+=================================
+
+This project has the following direct and indirect dependencies:
+
+templ (https://github.com/a-h/templ) by Adrian Hesketh
+zap (https://github.com/uber-go/zap) by Uber
+multierr (https://github.com/uber-go/multierr) by Uber
+
+
+It, also, has recipe files (Makefile, Dockerfile) that contain
+instructions for automatically pulling the following:
+
+Tailwind CLI (https://github.com/tailwindlabs/tailwindcss) by Tailwind Labs
+
+Their licenses are attached under the `/licenses/` directory.

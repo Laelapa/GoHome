@@ -18,3 +18,5 @@ COPY --from=build /app/gohome .
 COPY --from=build /app/static ./static
 EXPOSE 8080
 CMD ["./gohome"]
+
+# Licensing information for the included software is available in the LICENSE and NOTICE files in the project repository.
