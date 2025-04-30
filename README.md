@@ -160,10 +160,11 @@ docker build -t your-img-name:tag .
 
 # Important Considerations
 
-## CONFIGURATION RESPONSIBILITY
-
-While GoHome provides these safeguards, the project, for now, has **limited protection against misconfiguration** by the deployer. You should exercise caution when **setting environment variables**. The application has been set up with somewhat sensible defaults but it has no protections in place against bad input yet (it will get them at some point in the future). Invalid values might lead to unexpected behavior or security issues. See the [environment variables documentation](https://github.com/Laelapa/GoHome/wiki/Environment-Variables) for information on what their default, their valid and expected values are along with how each of them affects the configuration of the application.
-
 ## Project Status
 
-GoHome is currently a work-in-progress project that, in its current state, prioritizes public-facing security and functionality over developer experience. As I'm building this primarily to host my own personal website, current development focuses on making the visitor-facing parts secure and functional, rather than creating a polished configuration experience. Many settings are currently hardcoded in the templates and configuration options are minimal and mostly live in the code instead of configuration files (a lot of them adressed in the `TODO` & `FIXME` comments). The project is intentionally being developed with an outside-in approach, securing the perimeter first, then gradually improving the internal developer experience as the project matures.
+GoHome is currently a work-in-progress project that, in its current state, prioritizes public-facing security and functionality over developer experience. As I'm building this primarily to host my own personal website, current development focuses on making the visitor-facing parts secure and functional, rather than creating a polished configuration experience. Many settings are currently hardcoded in the templates and configuration options are minimal and mostly live in the code instead of configuration files (a lot of them adressed in the `TODO` & `FIXME` comments). The project is intentionally being developed with an outside-in approach, securing the perimeter first, then gradually improving the internal developer experience as it matures.
+
+## CONFIGURATION RESPONSIBILITY
+
+While GoHome provides [these safeguards](##public-facing-measures), the project, for now, has **limited protection against misconfiguration** by the deployer. You should exercise caution when **setting environment variables**. The application has been set up with somewhat sensible defaults but it has no protections in place against bad input yet (it will get them at some point in the future). Invalid values might lead to unexpected behavior or security issues. See the [environment variables documentation](https://github.com/Laelapa/GoHome/wiki/Environment-Variables) for information on what their default, their valid and expected values are along with how each of them affects the configuration of the application.
+
