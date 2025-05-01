@@ -31,4 +31,3 @@ func FileServerBlacklist(next http.Handler) http.Handler {
 func hasCaseInsensitiveSuffix(s, suffix string) bool {
 	return strings.HasSuffix(strings.ToLower(s), strings.ToLower(suffix))
 }
-

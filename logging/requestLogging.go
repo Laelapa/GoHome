@@ -2,6 +2,7 @@ package logging
 
 import (
 	"net/http"
+
 	"go.uber.org/zap"
 )
 
@@ -20,7 +21,7 @@ func (l *Logger) LogRequestError(msg string, r *http.Request, err error) {
 	l.Error(msg, reqFields...)
 }
 
-func (l *Logger) buildRequestFields( r *http.Request) []zap.Field {
+func (l *Logger) buildRequestFields(r *http.Request) []zap.Field {
 
 	// nil check mainly in case of misconfigured tests
 	if r == nil {

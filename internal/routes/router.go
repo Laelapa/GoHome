@@ -3,8 +3,8 @@ package routes
 import (
 	"net/http"
 
-	"github.com/Laelapa/GoHome/logging"
 	"github.com/Laelapa/GoHome/internal/routes/handlers"
+	"github.com/Laelapa/GoHome/logging"
 )
 
 // Setup initializes and returns a configured router with all application routes

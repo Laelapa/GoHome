@@ -26,12 +26,12 @@ func sanitizeLogValue(v string) string {
 
 		// Control characters
 		"\u0000", "[NUL]", // Null byte - can cause string truncation
-        "\u001b", "[ESC]", // ANSI escape sequences
+		"\u001b", "[ESC]", // ANSI escape sequences
 
 		// Invisible space characters
 		"\u200B", "[ZWS]", // Zero width space
-        "\u2028", "[LS]",  // Line separator
-        "\u2029", "[PS]",  // Paragraph separator
+		"\u2028", "[LS]", // Line separator
+		"\u2029", "[PS]", // Paragraph separator
 		"\u2063", "[ICS]", // Invisible separator
 
 		// JSON structural characters handled by zap
@@ -42,7 +42,6 @@ func sanitizeLogValue(v string) string {
 	)
 	return replacer.Replace(v)
 }
-
 
 // Protects against flooding the logs with long strings
 //
@@ -56,10 +55,9 @@ func truncateLogValue(v string, maxLength int) string {
 	return string(vRuned[:maxLength]) + "... [truncated]"
 }
 
-
 // filetLogValue sanitizes and truncates a string for logging purposes.
 func filetLogValue(v string) string {
-	
+
 	return truncateLogValue(sanitizeLogValue(v), maxHeaderLength)
-	
+
 }
