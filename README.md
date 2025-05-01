@@ -1,9 +1,14 @@
-# Laelapa/GoHome
+![Laelapa/GoHome](./gohome.png)
+
+*Why go hard when you can GoHome?*
+
+
 A simple personal **webpage** + **blog** + **portfolio** built from the ground up using *Go*, *templ* and *TailwindCSS*. 
 ---
 
 [![CodeQL](https://github.com/Laelapa/GoHome/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/Laelapa/GoHome/actions/workflows/github-code-scanning/codeql)
 
+---
 ## Overview
 
 **Laelapa/GoHome** is a Go HTTP server using the standard [net/http](https://pkg.go.dev/net/http) library, [uber/zap](https://github.com/uber-go/zap) for structured logging, and [a-h/templ](https://github.com/a-h/templ?tab=readme-ov-file) for HTML templating. The project provides a foundation for building and hosting personal websites with minimal dependencies.
