@@ -20,7 +20,6 @@ func (l *Logger) LogRequestError(msg string, r *http.Request, err error) {
 	l.Error(msg, reqFields...)
 }
 
-
 func (l *Logger) buildRequestFields( r *http.Request) []zap.Field {
 
 	// nil check mainly in case of misconfigured tests
@@ -31,7 +30,7 @@ func (l *Logger) buildRequestFields( r *http.Request) []zap.Field {
 	}
 
 	return []zap.Field{
-		zap.String(FieldRemoteAddr, getClientIP(r)),
+		zap.String(FieldRemoteAddr, filetLogValue(getClientIP(r))),
 		zap.String(FieldMethod, r.Method),
 		zap.String(FieldPath, filetLogValue(r.URL.Path)),
 		zap.String(FieldReferer, filetLogValue(r.Referer())),

@@ -6,9 +6,9 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/Laelapa/GoHome/internal/logging"
 	"github.com/Laelapa/GoHome/internal/middleware"
 	"github.com/Laelapa/GoHome/internal/routes"
+	"github.com/Laelapa/GoHome/logging"
 	"go.uber.org/zap"
 )
 
@@ -40,6 +40,16 @@ func New(
 	staticDir string,
 	shutdownTimeout time.Duration,
 ) *App {
+
+	if port == "" {
+		logger.LogAppWarn("Port not specified, using default port 8080")
+		port = "8080"
+	}
+	if staticDir == "" {
+		logger.LogAppWarn("Static directory not specified, using default directory 'static'")
+		staticDir = "static"
+	}
+
 	return &App{
 		ctx:    ctx,
 		logger: logger,
@@ -80,7 +90,7 @@ func (app *App) SetServerShutdownTimeout(t time.Duration) {
 
 	app.serverOptions.shutdownTimeout = t
 	app.logger.LogAppInfo(
-		"Server shutdown timeout set", 
+		"Server shutdown timeout set",
 		zap.Duration(logging.FieldDuration, t),
 	)
 }

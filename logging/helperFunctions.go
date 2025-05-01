@@ -11,7 +11,7 @@ const maxHeaderLength int = 1000 // TODO: Potentially make this configurable
 //
 // getClientIP retrieves the client IP address from the request if a reverse proxy is sitting in the middle.
 // Currently only works if deployed on fly.io.
-// FIXME: SECURITY: Fly-Client-IP can obviously be spoofed in non-fly.io environments.
+// FIXME: SECURITY: Fly-Client-IP can obviously be spoofed in non-fly.io environments and should be sanitized appropriately.
 func getClientIP(r *http.Request) string {
 	// Check if the request has a fly.io forwarded header
 	if clientIP := r.Header.Get("Fly-Client-IP"); clientIP != "" {
@@ -35,6 +35,10 @@ func sanitizeLogValue(v string) string {
 		"\u2063", "[ICS]", // Invisible separator
 
 		// JSON structural characters handled by zap
+
+		// Newline characters
+		"\n", "[LF]", // Line feed
+		"\r", "[CR]", // Carriage return
 	)
 	return replacer.Replace(v)
 }
