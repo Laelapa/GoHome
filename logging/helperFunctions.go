@@ -35,6 +35,10 @@ func sanitizeLogValue(v string) string {
 		"\u2063", "[ICS]", // Invisible separator
 
 		// JSON structural characters handled by zap
+
+		// Newline characters
+		"\n", "[LF]", // Line feed
+		"\r", "[CR]", // Carriage return
 	)
 	return replacer.Replace(v)
 }
