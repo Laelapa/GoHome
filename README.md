@@ -1,6 +1,8 @@
 # Laelapa/GoHome
 A simple personal **webpage** + **blog** + **portfolio** built from the ground up using *Go*, *templ* and *TailwindCSS*. 
+---
 
+[![CodeQL](https://github.com/Laelapa/GoHome/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/Laelapa/GoHome/actions/workflows/github-code-scanning/codeql)
 
 ## Overview
 
