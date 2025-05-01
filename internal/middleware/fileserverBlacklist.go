@@ -13,6 +13,7 @@ var blacklist = []string{
 }
 
 // FileServerBlacklist is a middleware that blocks requests for the suffixes listed in the blacklist to reach the fileserver.
+// If you wish to use this middleware you should add it to the attachBasicMiddleware function in the internal/app/app.go file.
 
 func FileServerBlacklist(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
