@@ -1,4 +1,4 @@
-![Laelapa/GoHome](./gohome.png)
+![Laelapa/GoHome](./gohome-light.png)
 
 *Why go hard when you can GoHome?*
 
