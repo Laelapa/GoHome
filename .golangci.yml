@@ -50,6 +50,10 @@ formatters:
       # Default: 100
       max-len: 120
 
+  exclusions:
+    paths:
+      - internal/interface/templates
+
 linters:
   enable:
     - asasalint # checks for pass []any as any in variadic func(...any)
@@ -524,3 +528,5 @@ linters:
           - gosec
           - noctx
           - wrapcheck
+    paths:
+      - internal/interface/templates
