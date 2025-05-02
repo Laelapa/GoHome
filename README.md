@@ -6,7 +6,7 @@
 A simple personal **webpage** + **blog** + **portfolio** built from the ground up using *Go*, *templ* and *TailwindCSS*. 
 ---
 
-[![CodeQL](https://github.com/Laelapa/GoHome/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/Laelapa/GoHome/actions/workflows/github-code-scanning/codeql) [![CodeFactor](https://www.codefactor.io/repository/github/laelapa/gohome/badge)](https://www.codefactor.io/repository/github/laelapa/gohome) [![Go Report Card](https://goreportcard.com/badge/github.com/Laelapa/GoHome)](https://goreportcard.com/report/github.com/Laelapa/GoHome)
+[![CodeQL](https://github.com/Laelapa/GoHome/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/Laelapa/GoHome/actions/workflows/github-code-scanning/codeql) [![golangci-lint](https://github.com/Laelapa/GoHome/actions/workflows/golangci-lint.yml/badge.svg)](https://github.com/Laelapa/GoHome/actions/workflows/golangci-lint.yml) [![CodeFactor](https://www.codefactor.io/repository/github/laelapa/gohome/badge)](https://www.codefactor.io/repository/github/laelapa/gohome) [![Go Report Card](https://goreportcard.com/badge/github.com/Laelapa/GoHome)](https://goreportcard.com/report/github.com/Laelapa/GoHome) 
 
 ---
 ## Overview

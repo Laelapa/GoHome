@@ -10,9 +10,14 @@ import (
 	"os/signal"
 	"time"
 
+	"go.uber.org/zap"
+
 	"github.com/Laelapa/GoHome/internal/app"
 	"github.com/Laelapa/GoHome/logging"
-	"go.uber.org/zap"
+)
+
+const (
+	DefaultShutdownTimeout = 5 * time.Second // Time until forceful shutdown
 )
 
 // main serves as the entry point for the application and acts as a thin wrapper
@@ -62,8 +67,11 @@ func run() error {
 	// Parse the server shutdown timeout from the environment
 	shutdownTimeout, err := time.ParseDuration(os.Getenv("SERVER_SHUTDOWN_TIMEOUT") + "s")
 	if err != nil {
-		shutdownTimeout = 5 * time.Second // fallback default
-		logger.LogAppWarn("Failed to parse SERVER_SHUTDOWN_TIMEOUT, falling back to default", zap.Duration("shutdown timeout", shutdownTimeout))
+		shutdownTimeout = DefaultShutdownTimeout // fallback default
+		logger.LogAppWarn(
+			"Failed to parse SERVER_SHUTDOWN_TIMEOUT, falling back to default",
+			zap.Duration("shutdown timeout", shutdownTimeout),
+		)
 	}
 
 	app := app.New(
