@@ -50,7 +50,6 @@ GoHome implements several security measures to protect against common web vulner
 
 - **Security Headers**: Implements headers like `X-Content-Type-Options: nosniff` to prevent MIME type sniffing.
 - **Log Sanitization**: Protects against log injection attacks by sanitizing HTTP headers and other user-controlled inputs before logging.
-- **Static File Protection**: Blocks access to sensitive files inside the `/static/` folder through the expandable [middleware/fileserverBlacklist.go](internal/middleware/fileserverBlacklist.go).
 
 ### Logging Features
 
