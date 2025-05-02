@@ -2,14 +2,16 @@ package app
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"net/http"
 	"time"
 
+	"go.uber.org/zap"
+
 	"github.com/Laelapa/GoHome/internal/middleware"
 	"github.com/Laelapa/GoHome/internal/routes"
 	"github.com/Laelapa/GoHome/logging"
-	"go.uber.org/zap"
 )
 
 type serverOptions struct {
@@ -54,8 +56,12 @@ func New(
 		ctx:    ctx,
 		logger: logger,
 		server: &http.Server{
-			Addr:    fmt.Sprintf(":%s", port),
-			Handler: newMux(staticDir, logger),
+			Addr:              fmt.Sprintf(":%s", port),
+			Handler:           newMux(staticDir, logger),
+			ReadHeaderTimeout: 10 * time.Second,  // Prevents slow header attacks
+			ReadTimeout:       30 * time.Second,  // Prevents slow request attacks
+			WriteTimeout:      30 * time.Second,  // Prevents clients from keeping connections open
+			IdleTimeout:       120 * time.Second, // Closes idle connections
 		},
 		serverOptions: &serverOptions{
 			shutdownTimeout: shutdownTimeout,
@@ -66,7 +72,9 @@ func New(
 // newMux creates and configures the HTTP request multiplexer with all routes
 // and middleware attached.
 func newMux(staticDir string, logger *logging.Logger) http.Handler {
+
 	mux := routes.Setup(staticDir, logger)
+
 	return attachBasicMiddleware(mux, logger)
 }
 
@@ -120,7 +128,7 @@ func (app *App) LaunchServer() error {
 	select {
 	case err := <-errChan:
 
-		return fmt.Errorf("server failed to start: %v", err)
+		return fmt.Errorf("server failed to start: %w", err)
 
 	case <-app.ctx.Done():
 
@@ -138,12 +146,13 @@ func (app *App) ShutdownServer() {
 	ctxServerShutdown, cancel := context.WithTimeout(context.Background(), app.serverOptions.shutdownTimeout)
 	defer cancel()
 
-	if err := app.server.Shutdown(ctxServerShutdown); err != nil && err != http.ErrServerClosed {
+	if err := app.server.Shutdown(ctxServerShutdown); err != nil && !errors.Is(err, http.ErrServerClosed) {
 		app.logger.LogAppError("Error during server shutdown", err)
 		app.logger.LogAppWarn("Closing server forcefully")
-		app.server.Close()
+		if closeErr := app.server.Close(); closeErr != nil {
+			app.logger.LogAppError("Error during forced server close", closeErr)
+		}
 	} else {
 		app.logger.LogAppInfo("Server shut down successfully")
 	}
-
 }

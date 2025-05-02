@@ -6,5 +6,7 @@ func (h *Handler) HandleGetHealth(w http.ResponseWriter, r *http.Request) {
 
 	h.Logger.LogRequestInfo("Rendered: Health check", r)
 	w.WriteHeader(http.StatusOK)
-	w.Write([]byte("OK"))
+	if _, err := w.Write([]byte("OK")); err != nil {
+		h.Logger.LogAppError("Error writing response", err)
+	}
 }

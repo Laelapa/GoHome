@@ -43,7 +43,7 @@ func sanitizeLogValue(v string) string {
 	return replacer.Replace(v)
 }
 
-// Protects against flooding the logs with long strings
+// Protects against flooding the logs with long strings.
 //
 // maxLength: the maximum length in characters (runes) of the string to log
 func truncateLogValue(v string, maxLength int) string {
