@@ -19,6 +19,10 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version: stable
+      - name: Install Templ
+        run: go install github.com/a-h/templ/cmd/templ@latest
+      - name: Generate Templates
+        run: templ generate
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v7
         with:
