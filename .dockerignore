@@ -63,5 +63,5 @@ bin/
 fly.toml
 
 # Project files that are not needed for deployment
-README.md
+**/README.md
 .git/
