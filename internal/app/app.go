@@ -9,6 +9,7 @@ import (
 
 	"go.uber.org/zap"
 
+	"github.com/Laelapa/GoHome/internal/env"
 	"github.com/Laelapa/GoHome/internal/middleware"
 	"github.com/Laelapa/GoHome/internal/routes"
 	"github.com/Laelapa/GoHome/logging"
@@ -24,6 +25,13 @@ type App struct {
 	server        *http.Server
 	serverOptions *serverOptions
 }
+
+const (
+	defaultReadHeaderTimeout = 10 * time.Second
+	defaultReadTimeout       = 30 * time.Second
+	defaultWriteTimeout      = 30 * time.Second
+	defaultIdleTimeout       = 120 * time.Second
+)
 
 // New creates and returns a new App instance with the provided dependencies.
 // It initializes the HTTP server with default configuration and prepares it
@@ -43,10 +51,6 @@ func New(
 	shutdownTimeout time.Duration,
 ) *App {
 
-	if port == "" {
-		logger.LogAppWarn("Port not specified, using default port 8080")
-		port = "8080"
-	}
 	if staticDir == "" {
 		logger.LogAppWarn("Static directory not specified, using default directory 'static'")
 		staticDir = "static"
@@ -56,12 +60,12 @@ func New(
 		ctx:    ctx,
 		logger: logger,
 		server: &http.Server{
-			Addr:              fmt.Sprintf(":%s", port),
+			Addr:              fmt.Sprintf(":%s", env.ValidatePort(port, logger)),
 			Handler:           newMux(staticDir, logger),
-			ReadHeaderTimeout: 10 * time.Second,  // Prevents slow header attacks
-			ReadTimeout:       30 * time.Second,  // Prevents slow request attacks
-			WriteTimeout:      30 * time.Second,  // Prevents clients from keeping connections open
-			IdleTimeout:       120 * time.Second, // Closes idle connections
+			ReadHeaderTimeout: defaultReadHeaderTimeout, // Prevents slow header attacks
+			ReadTimeout:       defaultReadTimeout,       // Prevents slow request attacks
+			WriteTimeout:      defaultWriteTimeout,      // Prevents clients from keeping connections open
+			IdleTimeout:       defaultIdleTimeout,       // Closes idle connections
 		},
 		serverOptions: &serverOptions{
 			shutdownTimeout: shutdownTimeout,
