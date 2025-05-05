@@ -41,7 +41,10 @@ run-watch: tailwind-watch-background
 docker-build:
 	docker build -t gohome:local .
 
-# Run the container with proper environment variables
+docker-build-fresh:
+	docker build -t gohome:localfresh . --no-cache
+
+# Run the container with some default environment variables
 docker-run:
 	docker stop gohome-local 2>/dev/null || true
 	docker rm gohome-local 2>/dev/null || true
@@ -58,7 +61,7 @@ docker-logs:
 	docker logs -f gohome-local
 
 # Build and run in one command
-docker-test: docker-build docker-run
+docker-test: docker-build-fresh docker-run
 	@echo "Container running at http://localhost:8080"
 	@echo "View logs with: make docker-logs"
 
